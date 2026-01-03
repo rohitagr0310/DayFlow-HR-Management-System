@@ -4,7 +4,7 @@ from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 
 from app.models.user import UserRole
-from app.schemas.user import User as UserSchema
+from app.schemas.user import User as UserSchema, UserCreate
 from app.schemas.auth import AdminCompanyRegister
 from app.schemas.token import Token
 from app.schemas.company import CompanyCreate
@@ -39,7 +39,7 @@ def register_company_and_admin(
 
     # 2. Create the admin user
     first_name, _, last_name = form_data.admin_name.partition(" ")
-    user_schema = UserSchema(
+    user_schema = UserCreate(
         first_name=first_name,
         last_name=last_name or "Admin",
         email=form_data.email,

@@ -1,14 +1,15 @@
 "use client"
 
 import Image from "next/image"
+import Link from "next/link"
 import type React from "react"
 
-import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { useAuth } from "@/lib/auth-context"
-import { AlertCircle, Lock, Mail, ArrowRight, Sparkles } from "lucide-react"
+import { ArrowRight, Lock, Mail, Sparkles } from "lucide-react"
+import { useState } from "react"
 
 interface LoginPageProps {
   onLoginSuccess: () => void
@@ -107,6 +108,13 @@ export function LoginPage({ onLoginSuccess }: LoginPageProps) {
               </form>
             </CardContent>
           </Card>
+
+          <div className="text-center text-sm">
+            <span className="text-muted-foreground">Don&apos;t have an account? </span>
+            <Link href="/signup" className="text-primary hover:underline font-medium">
+              Sign up
+            </Link>
+          </div>
 
           {/* Demo Accounts */}
           <Card className="border-blue-200 dark:border-blue-900 bg-blue-50/50 dark:bg-blue-950/30">
