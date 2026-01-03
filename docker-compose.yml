@@ -1,0 +1,32 @@
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: dayflow_user
+      POSTGRES_PASSWORD: dayflow_password
+      POSTGRES_DB: dayflow_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dayflow_user -d dayflow_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql://dayflow_user:dayflow_password@db:5432/dayflow_db
+      SECRET_KEY: c5ebcc2e9b0a6e550d735303ec1e3b2b8266a4182f423b09ca78cfa092552fef
+      ALGORITHM: HS256
+      ACCESS_TOKEN_EXPIRE_MINUTES: 60
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  postgres_data:
