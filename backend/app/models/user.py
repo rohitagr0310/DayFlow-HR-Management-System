@@ -11,7 +11,7 @@ from sqlalchemy import (
 )
 from sqlalchemy.orm import relationship
 
-from ..database import Base
+from app.database.database import Base
 
 
 class UserRole(str, enum.Enum):
@@ -54,6 +54,4 @@ class User(Base):
     # Relationships
     attendances = relationship("Attendance", back_populates="employee")
     leave_requests = relationship("LeaveRequest", back_populates="employee")
-    salary_setting = relationship(
-        "SalarySetting", back_populates="user", uselist=False
-    )
+    salary_setting = relationship("SalarySetting", back_populates="user", uselist=False)

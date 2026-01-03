@@ -4,11 +4,11 @@
 # It also ensures that all models are registered with SQLAlchemy's metadata
 # before `Base.metadata.create_all()` is called in `main.py`.
 
-from .attendance import Attendance
-from .company import Company
-from .leave import LeaveRequest, LeaveStatus, LeaveType
-from .salary import SalarySetting, SalaryComponent, SalaryComponentType
-from .user import User, UserRole
+from app.models.attendance import Attendance
+from app.models.company import Company
+from app.models.leave import LeaveRequest, LeaveStatus, LeaveType
+from app.models.salary import SalarySetting, SalaryComponent, SalaryComponentType
+from app.models.user import User, UserRole
 
 __all__ = [
     "Attendance",
