@@ -14,7 +14,10 @@ export default function Login() {
       return
     }
 
-    const navigationEntries = typeof performance !== "undefined" ? performance.getEntriesByType("navigation") : []
+    const navigationEntries =
+      typeof performance !== "undefined"
+        ? (performance.getEntriesByType("navigation") as PerformanceNavigationTiming[])
+        : []
     const navigationType = navigationEntries[0]?.type
 
     if (navigationType === "back_forward") {
