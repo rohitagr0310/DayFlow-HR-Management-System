@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import type React from "react"
 
 import { useState } from "react"
@@ -39,8 +40,10 @@ export function LoginPage({ onLoginSuccess }: LoginPageProps) {
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
       <div className="w-full max-w-md space-y-4">
         <Card className="shadow-lg">
-          <CardHeader className="text-center">
-            <CardTitle className="text-3xl font-bold text-blue-600">Dayflow</CardTitle>
+          <CardHeader className="text-center space-y-3">
+            <CardTitle className="flex justify-center">
+              <Image src="/day-flow.png" alt="Dayflow logo" width={160} height={48} className="h-12 w-auto" priority />
+            </CardTitle>
             <CardDescription>Human Resource Management System</CardDescription>
           </CardHeader>
           <CardContent>

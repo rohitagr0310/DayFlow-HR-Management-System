@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { Clock, Calendar, DollarSign, Home, User, Bell, FileText } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
@@ -22,7 +23,9 @@ export function Sidebar({ currentPage, onNavigate }: SidebarProps) {
   return (
     <aside className="w-64 border-r border-border bg-sidebar text-sidebar-foreground overflow-y-auto">
       <div className="p-6 border-b border-sidebar-border sticky top-0 bg-sidebar">
-        <h1 className="text-2xl font-bold text-blue-600 dark:text-blue-400">Dayflow</h1>
+        <div className="flex items-center">
+          <Image src="/day-flow.png" alt="Dayflow logo" width={140} height={40} className="h-8 w-auto" priority />
+        </div>
       </div>
       <nav className="p-4 space-y-2">
         {navItems.map((item) => {
