@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from .database.database import engine, Base
-from .routers import auth, users, attendance, leave, payroll
+from app.database.database import engine, Base
+from app.routers import auth, users, attendance, leave, payroll
 
 # This command will create all tables in the database.
 # In a real production environment, you would use a migration tool like Alembic.
