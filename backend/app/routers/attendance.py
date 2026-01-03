@@ -1,20 +1,21 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from datetime import date, datetime
 
-from ..models import models
+from backend.app.models.attendance import Attendance
 
-from ..schemas import schemas
-from ..database.deps import get_db
-from .users import get_current_active_user
+from backend.app.schemas.attendance import Attendance as AttendanceSchema
+from backend.app.schemas.user import User as UserSchema
+from backend.app.database.database import get_db
+from backend.app.routers.users import get_current_active_user
 
 router = APIRouter(prefix="/attendance", tags=["Attendance"])
 
 
-@router.post("/check-in", response_model=schemas.Attendance)
+@router.post("/check-in", response_model=AttendanceSchema)
 def check_in(
     db: Session = Depends(get_db),
-    current_user: models.User = Depends(get_current_active_user),
+    current_user: UserSchema = Depends(get_current_active_user),
 ):
     """
     Records a check-in for the current user for today's date.
@@ -22,15 +23,15 @@ def check_in(
     """
     today = date.today()
     attendance = (
-        db.query(models.Attendance)
+        db.query(Attendance)
         .filter(
-            models.Attendance.user_id == current_user.id,
-            models.Attendance.date == today,
+            Attendance.user_id == current_user.id,
+            Attendance.date == today,
         )
         .first()
     )
     if not attendance:
-        attendance = models.Attendance(user_id=current_user.id, date=today)
+        attendance = Attendance(user_id=current_user.id, date=today)
 
     if attendance.check_in:
         raise HTTPException(status_code=400, detail="Already checked in today")
@@ -42,10 +43,10 @@ def check_in(
     return attendance
 
 
-@router.post("/check-out", response_model=schemas.Attendance)
+@router.post("/check-out", response_model=AttendanceSchema)
 def check_out(
     db: Session = Depends(get_db),
-    current_user: models.User = Depends(get_current_active_user),
+    current_user: UserSchema = Depends(get_current_active_user),
 ):
     """
     Records a check-out for the current user for today's date.
@@ -53,10 +54,10 @@ def check_out(
     """
     today = date.today()
     attendance = (
-        db.query(models.Attendance)
+        db.query(Attendance)
         .filter(
-            models.Attendance.user_id == current_user.id,
-            models.Attendance.date == today,
+            Attendance.user_id == current_user.id,
+            Attendance.date == today,
         )
         .first()
     )
