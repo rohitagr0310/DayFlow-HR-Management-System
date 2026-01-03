@@ -1,34 +1,19 @@
 "use client"
 
-import { useState } from "react"
-import { AuthProvider, useAuth } from "@/lib/auth-context"
-import { LoginPage } from "@/components/login-page"
-import { EmployeePortal } from "@/components/portals/employee-portal"
-import { AdminPortal } from "@/components/portals/admin-portal"
+import { useEffect } from "react"
+import { useRouter } from "next/navigation"
 import { LandingPage } from "@/components/landing-page"
+import { useAuth } from "@/lib/auth-context"
 
-function DashboardRouter() {
+export default function HomePage() {
+  const router = useRouter()
   const { user } = useAuth()
 
-  if (!user) {
-    return null
-  }
+  useEffect(() => {
+    if (user) {
+      router.replace("/dashboard")
+    }
+  }, [router, user])
 
-  if (user.role === "Admin") {
-    return <AdminPortal />
-  }
-
-  return <EmployeePortal />
-}
-
-export default function Page() {
-  const [currentPage, setCurrentPage] = useState<"landing" | "login" | "dashboard">("landing")
-
-  return (
-    <AuthProvider>
-      {currentPage === "landing" && <LandingPage onGetStarted={() => setCurrentPage("login")} />}
-      {currentPage === "login" && <LoginPage onLoginSuccess={() => setCurrentPage("dashboard")} />}
-      {currentPage === "dashboard" && <DashboardRouter />}
-    </AuthProvider>
-  )
+  return <LandingPage onGetStarted={() => router.push("/login")} />
 }
