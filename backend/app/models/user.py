@@ -55,3 +55,24 @@ class User(Base):
     attendances = relationship("Attendance", back_populates="employee")
     leave_requests = relationship("LeaveRequest", back_populates="employee")
     salary_setting = relationship("SalarySetting", back_populates="user", uselist=False)
+
+    @property
+    def resume(self):
+        return {
+            "description": self.resume_description,
+            "skills": self.resume_skills,
+            "certifications": self.resume_certifications,
+        }
+
+    @property
+    def private_info(self):
+        return {
+            "date_of_birth": self.private_info_date_of_birth,
+            "personal_email": self.private_info_personal_email,
+            "phone": self.private_info_phone,
+            "address": self.private_info_address,
+            "gender": self.private_info_gender,
+            "marital_status": self.private_info_marital_status,
+            "nationality": self.private_info_nationality,
+            "emergency_contact": self.private_info_emergency_contact,
+        }

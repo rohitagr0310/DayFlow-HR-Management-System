@@ -1,6 +1,6 @@
 services:
   db:
-    image: postgres:15
+    image: postgres:15-alpine
     environment:
       POSTGRES_USER: dayflow_user
       POSTGRES_PASSWORD: dayflow_password

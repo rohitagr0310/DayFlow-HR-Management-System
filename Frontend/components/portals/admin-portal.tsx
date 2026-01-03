@@ -1,24 +1,25 @@
 "use client"
 
-import { useState } from "react"
-import { useAuth } from "@/lib/auth-context"
-import { AdminSidebar } from "@/components/admin/admin-sidebar"
-import { Header } from "@/components/layout/header"
 import { AdminDashboard } from "@/components/admin/admin-dashboard"
-import { EmployeeManagement } from "@/components/admin/employee-management"
-import { CompanySettings } from "@/components/admin/company-settings"
+import { AdminSidebar } from "@/components/admin/admin-sidebar"
 import { AttendanceReports } from "@/components/admin/attendance-reports"
-import { LeaveManagement } from "@/components/admin/leave-management"
+import { CompanySettings } from "@/components/admin/company-settings"
 import { Departments } from "@/components/admin/departments"
+import { EmployeeManagement } from "@/components/admin/employee-management"
+import { LeaveManagement } from "@/components/admin/leave-management"
+import { Reports } from "@/components/admin/reports"
 import { Roles } from "@/components/admin/roles"
 import { SalaryStructure } from "@/components/admin/salary-structure"
-import { Reports } from "@/components/admin/reports"
-import { mockEmployees, mockCompanySettings as initialCompanySettings } from "@/lib/mock-data"
+import { Header } from "@/components/layout/header"
+import { useEmployees } from "@/hooks/use-employees"
+import { useAuth } from "@/lib/auth-context"
+import { mockCompanySettings as initialCompanySettings } from "@/lib/mock-data"
+import { useState } from "react"
 
 export function AdminPortal() {
   const { logout } = useAuth()
   const [currentPage, setCurrentPage] = useState("dashboard")
-  const [employees, setEmployees] = useState(mockEmployees)
+  const { employees, setEmployees } = useEmployees()
   const [companySettings, setCompanySettings] = useState(initialCompanySettings)
 
   return (

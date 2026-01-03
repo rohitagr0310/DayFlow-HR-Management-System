@@ -1,3 +1,4 @@
+from typing import List
 from fastapi import APIRouter, Depends, HTTPException, status
 from jose import JWTError, jwt
 from sqlalchemy.orm import Session
@@ -96,6 +97,27 @@ def create_user(
         login_id=login_id,
     )
     return new_user
+
+
+
+@router.get("/users", response_model=List[User], tags=["Users"])
+def read_users(
+    skip: int = 0,
+    limit: int = 100,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_admin_user),
+):
+    """
+    Retrieve all users in the company. (Admin only)
+    """
+    users = (
+        db.query(User)
+        .filter(User.company_id == current_user.company_id)
+        .offset(skip)
+        .limit(limit)
+        .all()
+    )
+    return users
 
 
 @router.get("/users/me", response_model=User, tags=["Users"])
