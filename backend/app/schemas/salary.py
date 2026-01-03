@@ -1,7 +1,7 @@
 from typing import List
 from pydantic import BaseModel
 
-from ..models import SalaryComponentType
+from app.models.salary import SalaryComponentType
 
 
 # Base schema for a salary component

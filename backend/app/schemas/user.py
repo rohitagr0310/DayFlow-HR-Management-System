@@ -3,7 +3,7 @@ from typing import List, Optional
 
 from pydantic import BaseModel, EmailStr
 
-from ..models import UserRole
+from app.models.user import UserRole
 from .company import Company
 from .salary import SalarySetting
 

@@ -1,7 +1,6 @@
 from datetime import date, datetime
+from typing import Optional
 from pydantic import BaseModel
-
-from ..models import AttendanceStatus, AttendanceType
 
 
 # Base schema for attendance

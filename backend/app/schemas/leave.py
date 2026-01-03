@@ -3,7 +3,7 @@ from typing import Optional
 
 from pydantic import BaseModel
 
-from ..models import LeaveStatus, LeaveType
+from app.models.leave import LeaveStatus, LeaveType
 
 
 # Base schema for a leave request

@@ -1,15 +1,15 @@
 # This file makes the 'schemas' directory a package and exposes all schemas.
 
-from .auth import AdminCompanyRegister
-from .attendance import Attendance, AttendanceBase
-from .company import Company, CompanyBase, CompanyCreate
-from .leave import (
+from app.schemas.auth import AdminCompanyRegister
+from app.schemas.attendance import Attendance, AttendanceBase
+from app.schemas.company import Company, CompanyBase, CompanyCreate
+from app.schemas.leave import (
     LeaveRequest,
     LeaveRequestBase,
     LeaveRequestCreate,
     LeaveRequestUpdateStatus,
 )
-from .salary import (
+from app.schemas.salary import (
     SalaryComponent,
     SalaryComponentBase,
     SalaryComponentCreate,
@@ -17,8 +17,8 @@ from .salary import (
     SalarySettingBase,
     SalarySettingCreate,
 )
-from .token import Token, TokenData
-from .user import (
+from app.schemas.token import Token, TokenData
+from app.schemas.user import (
     User,
     UserBase,
     UserCreate,
