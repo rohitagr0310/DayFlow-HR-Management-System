@@ -1,12 +1,12 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
-from backend.app.database.database import get_db
-from backend.app.models.salary import SalaryComponentType
-from backend.app.models.user import User
-from backend.app.routers.users import get_current_admin_user
-from backend.app.schemas.salary import SalarySetting, SalarySettingCreate
-from backend.app.core import security
+from app.database.database import get_db
+from app.models.salary import SalaryComponentType
+from app.models.user import User
+from app.routers.users import get_current_admin_user
+from app.schemas.salary import SalarySetting, SalarySettingCreate
+from app.core import security
 
 
 router = APIRouter(

@@ -3,16 +3,16 @@ from typing import List
 from fastapi import APIRouter, Depends, HTTPException, status, UploadFile, File
 from sqlalchemy.orm import Session
 
-from backend.app.models.user import User, UserRole
-from backend.app.models.leave import LeaveRequest
+from app.models.user import User, UserRole
+from app.models.leave import LeaveRequest
 
-from backend.app.schemas.leave import (
+from app.schemas.leave import (
     LeaveRequest as LeaveRequestSchema,
     LeaveRequestCreate,
     LeaveRequestUpdateStatus,
 )
 
-from database.database import get_db
+from app.database.database import get_db
 from .users import get_current_active_user, get_current_admin_user
 
 router = APIRouter(prefix="/leave", tags=["Leave"])
